@@ -15,10 +15,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import springbootinterview.alexandremoraes.contract.SexoEnum;
+import springbootinterview.alexandremoraes.contracts.SexoEnum;
 
 @Data
-@Builder
+@Builder(toBuilder=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

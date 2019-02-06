@@ -1,3 +1,21 @@
+###Pré Condições:
+
+o arquivo settings.xml do maven deve estar em ${maven.home}/conf/settings.xml (para instalação do maven) ou ${user.home}/.m2/settings.xml (para instalação do usuario)
+
+
+###para gerar uma imagem com docker
+
+./mvnw clean package dockerfile:build
+
+###executando com docker
+
+sudo docker run -p 8080:8080 springbootinterview/alexandre-moraes:0.0.1
+
+###abrir documentação no Navegador
+
+sensible-browser http://localhost:8080/swagger-ui.html
+
+###API
 
 **curl -X POST -H 'Content-Type: application/json' -i http://localhost:8080/cidade --data '{"nome":"São Paulo","estadoEnum":"SP"}'**
 

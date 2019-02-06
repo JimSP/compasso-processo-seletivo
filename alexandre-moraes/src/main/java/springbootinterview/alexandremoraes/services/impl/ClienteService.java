@@ -1,4 +1,4 @@
-package springbootinterview.alexandremoraes.service.impl;
+package springbootinterview.alexandremoraes.services.impl;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -7,16 +7,18 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import springbootinterview.alexandremoraes.contract.ClienteContract;
+import springbootinterview.alexandremoraes.contracts.ClienteContract;
 import springbootinterview.alexandremoraes.entities.CidadeEntity;
 import springbootinterview.alexandremoraes.entities.ClienteEntity;
 import springbootinterview.alexandremoraes.exceptions.ClienteNaoEncontradoException;
 import springbootinterview.alexandremoraes.jpa.ClienteRepository;
-import springbootinterview.alexandremoraes.service.ClienteServiceInterface;
+import springbootinterview.alexandremoraes.services.ClienteServiceInterface;
 
 @Service
 public class ClienteService implements ClienteServiceInterface {
@@ -48,10 +50,17 @@ public class ClienteService implements ClienteServiceInterface {
 	 * @see springbootinterview.alexandremoraes.service.ClienteServiceInterface#consultar(springbootinterview.alexandremoraes.contract.ClienteContract, org.springframework.data.domain.Pageable)
 	 */
 	@Override
-	public List<ClienteContract> consultar(final ClienteContract clienteContract, final Pageable pageable) {
-		return clienteRepository.findByNomeCompletoContainingIgnoreCase(clienteContract.getNomeCompleto(), pageable)
-				.stream()
-				.map(cidadeEntity -> modelMapper.map(cidadeEntity, ClienteContract.class))
+	public List<ClienteContract> consultarPorNomeCompleto(final String nomeCompleto, final Pageable pageable) {
+		return clienteRepository.findByNomeCompletoContainingIgnoreCase(nomeCompleto, pageable)
+				.get()
+				.map(clienteEntity -> modelMapper.map(clienteEntity, ClienteContract.class))
+				.collect(Collectors.toList());
+	}
+	
+	public List<ClienteContract> consultar(final ClienteContract clienteContract, final Pageable pageable){
+		return clienteRepository.findAll(example(clienteContract), pageable)
+				.get()
+				.map(clienteEntity -> modelMapper.map(clienteEntity, ClienteContract.class))
 				.collect(Collectors.toList());
 	}
 
@@ -72,5 +81,18 @@ public class ClienteService implements ClienteServiceInterface {
 	@Transactional
 	public void deletar(final BigInteger id) {
 		clienteRepository.deleteById(id);
+	}
+	
+	public Example<ClienteEntity> example(final ClienteContract clienteContract) {
+		final ClienteEntity probe = ClienteEntity
+				.builder()
+				.nomeCompleto(clienteContract.getNomeCompleto())
+				.cidadeOndeMora(clienteContract.getCidadeOndeMoraId() == null ? null : CidadeEntity.builder().id(clienteContract.getCidadeOndeMoraId()).build())
+				.dataNascimento(clienteContract.getDataNascimento())
+				.idade(clienteContract.getIdade())
+				.sexo(clienteContract.getSexo())
+				.build();
+		
+		return Example.of(probe, ExampleMatcher.matchingAny());
 	}
 }

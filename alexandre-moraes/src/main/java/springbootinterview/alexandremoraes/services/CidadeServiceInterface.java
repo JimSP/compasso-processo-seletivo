@@ -1,10 +1,10 @@
-package springbootinterview.alexandremoraes.service;
+package springbootinterview.alexandremoraes.services;
 
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
-import springbootinterview.alexandremoraes.contract.CidadeContract;
+import springbootinterview.alexandremoraes.contracts.CidadeContract;
 
 /***
  * Interface de serviço de Cidades.

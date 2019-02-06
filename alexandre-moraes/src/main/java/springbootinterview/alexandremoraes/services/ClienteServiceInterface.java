@@ -1,11 +1,11 @@
-package springbootinterview.alexandremoraes.service;
+package springbootinterview.alexandremoraes.services;
 
 import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
-import springbootinterview.alexandremoraes.contract.ClienteContract;
+import springbootinterview.alexandremoraes.contracts.ClienteContract;
 
 /***
  * Interface de serviço de Clientes.
@@ -31,7 +31,7 @@ public interface ClienteServiceInterface {
 	 * @param pageable
 	 * @return List<ClienteContract>
 	 */
-	List<ClienteContract> consultar(ClienteContract clienteContract, Pageable pageable);
+	List<ClienteContract> consultarPorNomeCompleto(String nomeCompleto, Pageable pageable);
 
 	/***
 	 * efetua uma consulta de ClienteContract pelo seu id (identificador único).

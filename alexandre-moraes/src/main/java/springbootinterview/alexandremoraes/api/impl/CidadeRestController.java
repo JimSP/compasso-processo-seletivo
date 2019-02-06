@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import springbootinterview.alexandremoraes.api.CidadeApi;
-import springbootinterview.alexandremoraes.contract.CidadeContract;
-import springbootinterview.alexandremoraes.contract.EstadoEnum;
-import springbootinterview.alexandremoraes.service.CidadeServiceInterface;
+import springbootinterview.alexandremoraes.contracts.CidadeContract;
+import springbootinterview.alexandremoraes.contracts.EstadoEnum;
+import springbootinterview.alexandremoraes.services.CidadeServiceInterface;
 
 @RestController
 public class CidadeRestController implements CidadeApi {

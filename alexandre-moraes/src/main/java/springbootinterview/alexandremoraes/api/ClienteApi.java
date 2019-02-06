@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
-import springbootinterview.alexandremoraes.contract.ClienteContract;
+import springbootinterview.alexandremoraes.contracts.ClienteContract;
 
 /***
  * API de acesso do recurso ClienteContract.

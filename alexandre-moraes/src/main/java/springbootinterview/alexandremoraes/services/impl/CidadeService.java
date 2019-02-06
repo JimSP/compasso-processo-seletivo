@@ -1,4 +1,4 @@
-package springbootinterview.alexandremoraes.service.impl;
+package springbootinterview.alexandremoraes.services.impl;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -11,11 +11,11 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import springbootinterview.alexandremoraes.contract.CidadeContract;
+import springbootinterview.alexandremoraes.contracts.CidadeContract;
 import springbootinterview.alexandremoraes.entities.CidadeEntity;
 import springbootinterview.alexandremoraes.exceptions.CidadeNotFoundException;
 import springbootinterview.alexandremoraes.jpa.CidadeRepository;
-import springbootinterview.alexandremoraes.service.CidadeServiceInterface;
+import springbootinterview.alexandremoraes.services.CidadeServiceInterface;
 
 @Service
 public class CidadeService implements CidadeServiceInterface {
@@ -51,7 +51,7 @@ public class CidadeService implements CidadeServiceInterface {
 		return cidadeRepository.findById(id).orElseThrow(()->new CidadeNotFoundException(id));
 	}
 	
-	private Example<CidadeEntity> example(final CidadeContract cidadeContract) {
+	public Example<CidadeEntity> example(final CidadeContract cidadeContract) {
 		final CidadeEntity probe = CidadeEntity
 				.builder()
 				.nome(cidadeContract.getNome())

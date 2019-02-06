@@ -1,4 +1,4 @@
-package springbootinterview.alexandremoraes.contract;
+package springbootinterview.alexandremoraes.contracts;
 
 public enum EstadoEnum {
 

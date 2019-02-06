@@ -1,4 +1,4 @@
-package springbootinterview.alexandremoraes.contract;
+package springbootinterview.alexandremoraes.contracts;
 
 import java.math.BigInteger;
 
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder=true)
 public class CidadeContract {
 	
 	@JsonProperty
@@ -31,6 +31,7 @@ public class CidadeContract {
 			final BigInteger id,
 			@JsonProperty final String nome,
 			@JsonProperty final EstadoEnum estado) {
+		this.id = id;
 		this.nome = nome;
 		this.estado = estado;
 	}

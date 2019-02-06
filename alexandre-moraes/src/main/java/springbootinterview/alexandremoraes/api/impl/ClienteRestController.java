@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import springbootinterview.alexandremoraes.api.ClienteApi;
-import springbootinterview.alexandremoraes.contract.ClienteContract;
-import springbootinterview.alexandremoraes.service.ClienteServiceInterface;
+import springbootinterview.alexandremoraes.contracts.ClienteContract;
+import springbootinterview.alexandremoraes.services.ClienteServiceInterface;
 
 @RestController
 public class ClienteRestController implements ClienteApi {
@@ -56,7 +56,7 @@ public class ClienteRestController implements ClienteApi {
 
 		final ClienteContract clienteContract = ClienteContract.builder().nomeCompleto(nomeCompleto).build();
 
-		return clienteServiceInterface.consultar(clienteContract, pageable);
+		return clienteServiceInterface.consultarPorNomeCompleto(clienteContract.getNomeCompleto(), pageable);
 	}
 
 	/* (non-Javadoc)
